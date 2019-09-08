@@ -1,3 +1,8 @@
+[![License LGPLv3][LGPLv3 badge]][LGPLv3]
+[![License ASL 2.0][ASL 2.0 badge]][ASL 2.0]
+[![Build Status][Travis badge]][Travis]
+[![Maven Central][Maven Central badge]][Maven]
+
 ## Read me first
 
 This project, as of version 0.8, is licensed under both LGPLv3 and ASL 2.0. See
@@ -27,7 +32,7 @@ Gradle:
 
 ```groovy
 dependencies {
-    compile(group: "com.github.fge", name: "uri-template", version: "yourVersionHere");
+    compile(group: "com.github.java-json-tools", name: "uri-template", version: "yourVersionHere");
 };
 ```
 
@@ -35,7 +40,7 @@ Maven:
 
 ```xml
 <dependency>
-    <groupId>com.github.fge</groupId>
+    <groupId>com.github.java-json-tools</groupId>
     <artifactId>uri-template</artifactId>
     <version>yourVersionHere</version>
 </dependency>
@@ -133,3 +138,11 @@ More generally, if you have to generate a lot of URIs (or URLs, since URLs are U
 sample "place holders" for values and don't want to be bothered with encoding problems etc, this is
 the library for you.
 
+[LGPLv3 badge]: https://img.shields.io/:license-LGPLv3-blue.svg
+[LGPLv3]: http://www.gnu.org/licenses/lgpl-3.0.html
+[ASL 2.0 badge]: https://img.shields.io/:license-Apache%202.0-blue.svg
+[ASL 2.0]: http://www.apache.org/licenses/LICENSE-2.0.html
+[Travis Badge]: https://api.travis-ci.org/java-json-tools/uri-template.svg?branch=master
+[Travis]: https://travis-ci.org/java-json-tools/uri-template
+[Maven Central badge]: https://img.shields.io/maven-central/v/com.github.java-json-tools/uri-template.svg
+[Maven]: https://search.maven.org/artifact/com.github.java-json-tools/uri-template
