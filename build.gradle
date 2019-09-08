@@ -17,36 +17,6 @@
  * - ASL 2.0: http://www.apache.org/licenses/LICENSE-2.0.txt
  */
 
-/*
- * This has to be here... It will not be taken into account in common.gradle!
- *
- * Looks like a serious bug... See also:
- *
- * http://forums.gradle.org/gradle/topics/buildscript_in_subprojects_ignored
- *
- * We also use Spring's propdeps plugin to have a _real_ provided scope. See:
- *
- * https://github.com/spring-projects/gradle-plugins/tree/master/propdeps-plugin
- */
-//buildscript {
-//    repositories {
-//        maven {
-//            url "http://repo.springsource.org/plugins-release";
-//        }
-//    }
-//    dependencies {
-//        classpath(group: "org.springframework.build.gradle",
-//            name: "propdeps-plugin", version: "0.0.5");
-//    }
-//};
-
-//configure(allprojects) {
-//    apply(plugin: "propdeps");
-//    apply(plugin: "propdeps-maven");
-//    apply(plugin: "propdeps-idea");
-//    apply(plugin: "propdeps-eclipse");
-//}
-
 apply(plugin: "java");
 apply(plugin: "maven");
 apply(plugin: "signing");
@@ -55,6 +25,8 @@ apply(plugin: "idea");
 apply(plugin: "eclipse");
 
 apply(from: "project.gradle");
+
+group = "com.github.java-json-tools";
 
 /*
  * Repositories to use
@@ -103,13 +75,15 @@ artifacts {
     archives javadocJar;
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = "1.11";
+wrapper {
+    gradleVersion = "5.6.2";
     distributionUrl = "http://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip";
 }
 
-task pom << {
-    pom {}.writeTo("${projectDir}/pom.xml");
+task pom {
+    doLast {
+        pom {}.writeTo("${projectDir}/pom.xml");
+    }
 }
 
 /*
@@ -117,25 +91,27 @@ task pom << {
  */
 
 project.ext {
-    gitrwscm = sprintf("git@github.com:fge/%s", name);
-    gitroscm = sprintf("https://github.com/fge/%s.git", name);
-    projectURL = sprintf("https://github.com/fge/%s", name);
+    description = "A fully functional Java implementation of URI templates (RFC 6570)";
+    scmUrl = sprintf("git@github.com:java-json-tools/%s.git", name)
+    projectURL = sprintf("https://github.com/java-json-tools/%s", name);
     sonatypeStaging = "https://oss.sonatype.org/service/local/staging/deploy/maven2/";
     sonatypeSnapshots = "https://oss.sonatype.org/content/repositories/snapshots/";
 };
 
-task checkSigningRequirements << {
-    def requiredProperties = [ "sonatypeUsername", "sonatypePassword" ];
-    def noDice = false;
-    requiredProperties.each {
-        if (project.properties[it] == null) {
-            noDice = true;
-            System.err.printf("property \"%s\" is not defined!")
+task checkSigningRequirements {
+    doLast {
+        def requiredProperties = [ "sonatypeUsername", "sonatypePassword" ];
+        def noDice = false;
+        requiredProperties.each {
+            if (project.properties[it] == null) {
+                noDice = true;
+                System.err.printf("property \"%s\" is not defined!")
+            }
         }
+        if (noDice)
+            throw new IllegalStateException("missing required properties for " +
+                "upload");
     }
-    if (noDice)
-        throw new IllegalStateException("missing required properties for " +
-            "upload");
 }
 
 uploadArchives {
@@ -171,15 +147,15 @@ uploadArchives {
     uploadArchives.repositories.mavenDeployer
 ]*.pom*.whenConfigured { pom ->
     pom.project {
-        name "${name}";
+        name "${project.name}";
         packaging "jar";
         description "${description}";
         url "${projectURL}";
 
         scm {
-            url "${gitrwscm}";
-            connection "${gitrwscm}";
-            developerConnection "${gitroscm}";
+            url "${scmUrl}";
+            connection "${scmUrl}";
+            developerConnection "scm:git:${scmUrl}";
         }
 
         licenses {
@@ -197,9 +173,9 @@ uploadArchives {
 
         developers {
             developer {
-                id "fge";
-                name "Francis Galiegue";
-                email "fgaliegue@gmail.com";
+                id "huggsboson";
+                name "John Huffaker";
+                email "jhuffaker+java-json-tools@gmail.com";
             }
         }
     }
