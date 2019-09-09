@@ -37,8 +37,8 @@ final class CharMatchers
         .precomputed();
 
     static {
-        final CharMatcher ctl = CharMatcher.JAVA_ISO_CONTROL;
-        final CharMatcher spc = CharMatcher.WHITESPACE;
+        final CharMatcher ctl = CharMatcher.javaIsoControl();
+        final CharMatcher spc = CharMatcher.whitespace();
         /*
          * This doesn't include the %: percent-encoded sequences will be
          * handled in the appropriate template parser
