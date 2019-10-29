@@ -22,6 +22,8 @@ package com.github.fge.uritemplate;
 public class URITemplateException
     extends Exception
 {
+    private static final long serialVersionUID = 1364504760692651950L;
+
     public URITemplateException(final String message)
     {
         super(message);
