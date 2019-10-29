@@ -30,6 +30,8 @@ import java.nio.CharBuffer;
 public final class URITemplateParseException
     extends URITemplateException
 {
+    private static final long serialVersionUID = -2320999022193049874L;
+
     private final String originalMessage;
     private final int offset;
 
