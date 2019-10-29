@@ -22,8 +22,8 @@
  */
 group = "com.github.java-json-tools";
 version = "0.9.1-SNAPSHOT";
-sourceCompatibility = JavaVersion.VERSION_1_6;
-targetCompatibility = JavaVersion.VERSION_1_6; // defaults to sourceCompatibility
+sourceCompatibility = JavaVersion.VERSION_1_7;
+targetCompatibility = JavaVersion.VERSION_1_7; // defaults to sourceCompatibility
 
 /*
  * List of dependencies
@@ -48,7 +48,7 @@ dependencies {
  * External javadoc links
  */
 // FIXME: For some reason, making this https causes OpenJDK 11 to fail.
-javadoc.options.links("http://docs.oracle.com/javase/6/docs/api/");
+javadoc.options.links("http://docs.oracle.com/javase/7/docs/api/");
 javadoc.options.links("https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/3.0.1/");
 javadoc.options.links("https://fasterxml.github.io/jackson-databind/javadoc/2.2.0/");
 javadoc.options.links("https://www.javadoc.io/doc/com.google.guava/guava/25.1-jre/");
