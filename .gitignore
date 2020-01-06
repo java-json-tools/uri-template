@@ -1,7 +1,0 @@
-*.iml
-target
-.idea
-build
-.gradle
-out
-META-INF
